@@ -24,6 +24,9 @@ public class Contract {
 	{
 		this(n,"",p,"");
 	}
+	public void mergeContract(Contract c) {
+		
+	}
 	
 	
 	public String getName() {
@@ -72,6 +75,9 @@ public class Contract {
 		System.out.println();
 		
 	}
+	public int compareto(Contract c) {
+		return this.getName().compareTo(c.getName());
+	}
 	 public static void main(String[] args){
 	        try {
 	            method();
@@ -91,7 +97,9 @@ public class Contract {
 		Contract c=new Family("zhangsan","male",
 				new String[]{"1786223442","178344535"},"fetretr",d,"shandong");
 		c.display();
+		
 	}
+	
 	
 
 
