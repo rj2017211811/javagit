@@ -1,4 +1,6 @@
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Contract {
 	private String name;
@@ -70,10 +72,25 @@ public class Contract {
 		System.out.println();
 		
 	}
-	public static void main(String[] args)  {
-		Contract contract1=new Contract("zhangsan","male",
-				new String[]{"1786223442","1783435"},"fetretr");
-		contract1.display();
+	 public static void main(String[] args){
+	        try {
+	            method();
+	        } catch (ParseException e) {
+	            e.printStackTrace();
+	        }
+
+	        System.out.println("over over");
+	    }
+	
+	public static void method() throws ParseException {
+		
+		SimpleDateFormat abc=new SimpleDateFormat("yyyy-MM-dd");
+		Date d= abc.parse("1999-01-28");
+		//Date d=new Date();
+	
+		Contract c=new Family("zhangsan","male",
+				new String[]{"1786223442","178344535"},"fetretr",d,"shandong");
+		c.display();
 	}
 	
 
