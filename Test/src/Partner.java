@@ -29,7 +29,9 @@ public class Partner extends Contract {
 		this.title = title;
 	}
 	public void display(){
-		super.display();
+	
+			super.display();
+	
 		System.out.println("title:"+title);
 		System.out.println("company:"+getCompany());
 		//System.out.println("company"+company);

@@ -52,6 +52,7 @@ public class Company extends Contract {
 	}
 	
 	public void display(){
+	
 		super.display();
 		
 		System.out.println("address:"+getAddress());

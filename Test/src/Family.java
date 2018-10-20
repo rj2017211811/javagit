@@ -10,7 +10,7 @@ public class Family extends Contract {
 	}
 	
 	
-	public Family(String name, String gender, String[] phones, String emails,Date birth,String address) {
+	public Family(String name, String gender, String[] phones, String emails,Date birth,String address)  {
 		super(name,gender,phones,emails);//调用父类构造方法实现子类参数的初始化
 		this.setBirthday(birth);
 		this.setAddress(address);
@@ -29,7 +29,9 @@ public class Family extends Contract {
 		this.address = address;
 	}
 	public void display(){
-		super.display();
+
+			super.display();
+		
 		SimpleDateFormat abc=new SimpleDateFormat("yyyy-MM-dd");
 		System.out.println("birthday:"+abc.format(this.getBirthday()));
 		System.out.println("address:"+this.getAddress());
