@@ -1,3 +1,5 @@
+import java.util.List;
+
 
 
 
@@ -11,7 +13,7 @@ public class Company extends Contract {
 	public Company(){
 		
 	}
-	public Company(String name,String gender,String[] phones,String emails,String name2,
+	public Company(String name,String gender,List <String> phones,String emails,String name2,
 			String address,String fax,String phone){
 		super(name,gender,phones,emails);
 		this.setName(name2);
@@ -63,14 +65,14 @@ public class Company extends Contract {
 		
 	}
 
-	public static void main(String[] args)  {
+	/*public static void main(String[] args)  {
 		Company company=new Company("zhangsan","male",
 				new String[]{"1786223442","178344535"},"fetretr",
 				"ÌÚÑ¶","ÉîÛÚ","10002¡£qq¡£com","189995656");
 					company.display();
 		
 		
-	}
+	}*/
 	
 
 }

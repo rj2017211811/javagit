@@ -1,9 +1,9 @@
-import java.text.Collator;
+import java.text.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
+import java.util.*;
+
 class NameException extends Exception{
 	public NameException()
 	{
@@ -19,15 +19,16 @@ class GenderException extends Exception{
 	}
 }
 
-public class Contract {
+public  class Contract extends Object implements Comparable<Contract>{
 	private String name;
 	private String gender;
-	private  String[] phones;
+	//private  String[] phones;
+	private List<String> phones;
 	private String emails;
 	public Contract(){
 		
 	}
-	public Contract(String name,String gender,String[] phones,String emails) 
+	public Contract(String name,String gender,List <String> phones,String emails) 
 	{
 		super();
 
@@ -51,13 +52,20 @@ public class Contract {
 		//不要直接赋值
 		
 	}
-	public Contract(String n,String[] p) throws NameException, GenderException
+	public Contract(String n,List <String> p) throws NameException, GenderException
 	{
 		this(n,"",p,"");
 	}
-	
-	
-	public String getName() {
+     public boolean equals(Object o)
+     {
+    	 if(o!=null&&o.getClass()==Contract.class)
+    		
+    		 return this.getName().equals(((Contract)o).getName());
+    	 else
+    		return false;
+     }
+     
+     public String getName() {
 		return name;
 	}
 	public void setName(String name) throws NameException {
@@ -78,10 +86,10 @@ public class Contract {
 
 		this.gender = gender;
 	}
-	public String[] getPhones() {
+	public  List <String> getPhones() {
 		return phones;
 	}
-	public void setPhones(String[] phones) {
+	public void setPhones( List <String> phones) {
 		
 		this.phones = phones;
 	}
@@ -120,64 +128,55 @@ public class Contract {
 	}
 	public void mergeContracts(Contract c) throws GenderException//合并两个联系人
 	{
-		if(this.getName().equals(c.getName()))
+		if(c!=null)
 		{
-			if(this.getGender().equals(""))
+			if(this.getName().equals(c.getName()))
 			{
-				this.setGender(c.getGender());
-				
-			}
-			if(this.getEmails().equals(""))
-			{
-				this.setGender(c.getEmails());
-				
-			}
-			//合并电话
-			boolean flag=true;
-			int count=0;
-			String[]newPhones=new String[c.getPhones().length];
-			for(int i=0;i<this.getPhones().length;i++)
-			{
-				if(this.getPhones()[i].equals(c.getPhones()[i]))
+				if(this.getGender()!=null&&this.getGender().equals(""))
 				{
-					flag=false;
-					break;
-				}
-				if(flag)//如果电话号码为新的
-				{
-					newPhones[count++]=c.getPhones()[i];
+					this.setGender(c.getGender());
 					
 				}
+				if(this.getEmails().equals(""))
+				{
+					this.setGender(c.getEmails());
+					
+				}
+				//合并电话
+				List<String> src=this.getPhones();
+				src.removeAll(c.getPhones());
+				src.addAll(c.getPhones());
+				//this.setPhones(src);
+				
 			}
-			int position=phones.length;
-			phones=Arrays.copyOf(phones,phones.length+count);
-			System.arraycopy(newPhones, 0, phones, position, count);	
+			
 		}
 		
+		
 	}
-	 public static void main(String[] args){
-	        try {
-	            method();
-	        } catch (ParseException e) {
-	            e.printStackTrace();
-	        }
-
-	        System.out.println("over over");
+	 public static void main(String[] args) throws ParseException, GenderException{
+		 SimpleDateFormat abc=new SimpleDateFormat("yyyy-MM-dd");
+			Date d= abc.parse("1999-01-28");
+			//Date d=new Date();
+		   List<String> phone=new ArrayList<String>();
+		   phone.add("1786224426");
+			phone.add("1786223442");
+				 
+			Contract c=new Family("zhangsan","male",
+					phone,"fetretr",d,"shandong");
+			c.display();
+			List<String> phone2=new ArrayList();
+			phone2.add("1786224424");
+			phone2.add("1786223442");
+			Contract c2=new Family("zhangsan","male",
+					phone2,"fetretr",d,"shandong");
+			
+			c.mergeContracts(c2);
+			c.display();
 	    }
-	
-	public static void method() throws ParseException {
-		
-		SimpleDateFormat abc=new SimpleDateFormat("yyyy-MM-dd");
-		Date d= abc.parse("1999-01-28");
-		//Date d=new Date();
-	
-		Contract c=new Family("zhangsan","male",
-				new String[]{"1786223442","178344535"},"fetretr",d,"shandong");
-		c.display();
-		
+	@Override
+	public int compareTo(Contract c) {
+		Collator instance=Collator.getInstance(java.util.Locale.CHINA);
+		return instance.compare(this.getName(),c.getName());
 	}
-	
-	
-
-
 }
